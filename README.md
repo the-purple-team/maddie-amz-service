@@ -1,1 +1,1 @@
-# maddie-front-end-capstone
+# Front End Capstone
