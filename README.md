@@ -4,9 +4,9 @@
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/the-purple-team/bruce-service
+  - https://github.com/the-purple-team/bradyService
+  - https://github.com/the-purple-team/Jose-Questions-And-Answers-Service
   - https://github.com/teamName/repo
 
 ## Table of Contents
