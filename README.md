@@ -33,7 +33,15 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 From within the root directory:
 
 ```sh
+brew install mysql@5.7
+
 npm install -g webpack
 npm install
 ```
 
+connect mysql --> mysql -uroot
+/usr/local/opt/mysql@5.7/bin/mysql.server start
+
+??
+export LDFLAGS="-L/usr/local/opt/mysql@5.7/lib"
+  export CPPFLAGS="-I/usr/local/opt/mysql@5.7/include"
