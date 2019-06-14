@@ -43,13 +43,3 @@ CREATE TABLE item_availability (
   CONSTRAINT fk_item FOREIGN KEY fk_item(item_id) REFERENCES item(id),
   CONSTRAINT fk_vendor FOREIGN KEY fk_vendor(vendor_id) REFERENCES vendor(id)
 );
-
-CREATE TABLE ups_shipment (
-  id INT NOT NULL AUTO_INCREMENT  PRIMARY KEY,
-  from_city VARCHAR(255),
-  from_state VARCHAR(2),
-  to_city VARCHAR(255),
-  to_state VARCHAR(2),
-  shipment_type	ENUM('1 Day', '2 Day', 'Standard') NOT NULL,
-  expected_num_of_days INT
-);

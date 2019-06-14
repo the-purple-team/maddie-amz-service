@@ -11,9 +11,14 @@
 
 ## Table of Contents
 
+1. [Assumptions] (#Assumptions)
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
+
+## Assumptions
+
+-- all Users are located in US
 
 ## Usage
 
@@ -39,9 +44,10 @@ npm install -g webpack
 npm install
 ```
 
-connect mysql --> mysql -uroot
-/usr/local/opt/mysql@5.7/bin/mysql.server start
+connect mysql --> mysql -u root -p
+
+<!-- /usr/local/opt/mysql@5.7/bin/mysql.server start
 
 ??
 export LDFLAGS="-L/usr/local/opt/mysql@5.7/lib"
-  export CPPFLAGS="-I/usr/local/opt/mysql@5.7/include"
+  export CPPFLAGS="-I/usr/local/opt/mysql@5.7/include" -->

@@ -9,41 +9,41 @@ connection.connect((err) => {
   }
 });
 
-// const getAllPhrases = function (cb) {
-//   //get all Phrases in the mysql phrases table
-//   connection.query('SELECT * FROM phrases;', (err, dbRes) => {
-//     if (err) {
-//       console.log('mysql getAllPhrases error ' + err);
-//       cb(err, null);
-//     } else {
-//       //console.log('mysql getAllPhrases result 0 ' + JSON.stringify(dbRes[0]) + ', ' + typeof dbRes);
-//       cb(null, dbRes);
-//     }
-//   });
-// }
+// user(
+//   id INT NOT NULL AUTO_INCREMENT,
+//   name VARCHAR(255) NOT NULL,
+//   email VARCHAR(255) NOT NULL,
+//   default_address_zip INT(5),
+//   PRIMARY KEY(id)
+// );
 
-// const updatePhrase = function (index, newStatus, cb) {
-//   console.log('UPDATE phrases SET status="' + newStatus + '" WHERE id=' + index + ';');
-//   connection.query('UPDATE phrases SET status="' + newStatus + '" WHERE id=' + index + ';', (err) => {
-//     if (err) {
-//       console.log('mysql updatePhrase error ' + err);
-//       cb(err, null);
-//     } else {
-//       getAllPhrases((err, results) => {
-//         if (err) {
-//           console.log('mysql updatePhrase getAllPhrases error ' + err);
-//           cb(err, null);
-//         } else {
-//           console.log('updated');
-//           cb(null, results);
-//         }
-//       })
-//     }
-//   })
-// }
+
+const insertIntoTable = function (tableName, data, cb) {
+  var dataKeys = '';
+  var dataValues = '';
+  for (var prop in data) {
+    if (dataKeys !== '') {
+      dataKeys += ', ';
+      dataValues += ', "';
+    }
+    if (dataValues === '') {
+      dataValues += '"';
+    }
+    dataKeys += prop;
+    dataValues += data[prop] + '"';
+  }
+  var queryString = 'INSERT INTO ' + tableName + ' (' + dataKeys + ') VALUES (' + dataValues + '); ';
+  console.log('db queryString = ' + queryString);
+  connection.query(queryString, (err, dbRes) => {
+    if (err) {
+      console.log('mysql insertIntoTable error ' + err);
+      cb(err, null);
+    } else {
+      cb(null, dbRes);
+    }
+  });
+};
 
 module.exports = {
-  //TODO
-  // getAllPhrases: getAllPhrases,
-  // updatePhrase: updatePhrase
+  insertIntoTable: insertIntoTable
 };
