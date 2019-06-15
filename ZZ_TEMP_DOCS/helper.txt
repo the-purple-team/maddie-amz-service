@@ -1,0 +1,11 @@
+
+Resources:
+
+## Faker
+https://github.com/Marak/faker.js/wiki/
+
+
+
+## MySql
+
+http://www.mysqltutorial.org/mysql-foreign-key/
