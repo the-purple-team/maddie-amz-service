@@ -11,9 +11,11 @@ const PORT = 3030;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const clientDist = path.join(__dirname, '/..', '/client/dist');
-app.use(express.static(clientDist));
-
+const clientDistFolder = path.join(__dirname, '/..', '/client/dist');
+const publicFolder = path.join(__dirname, '/..', '/public');
+console.log("public " + publicFolder);
+app.use(express.static(clientDistFolder));
+app.use('/static', express.static(publicFolder));
 
 
 app.get('/', (req, res) => {

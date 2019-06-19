@@ -2,9 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
+import style from "../../../public/style.css";
+
 import ShippingStatement from './ShippingStatement.jsx';
-
-
+import AvailabilityStatement from './AvailabilityStatement.jsx';
+import SoldFulfilledStatement from './SoldFulfilledStatement.jsx';
+import GiftWrapStatement from './GiftWrapStatement.jsx';
+import UserLocationStatement from './UserLocationStatement.jsx';
 
 class Pricing extends React.Component {
   constructor(props) {
@@ -13,7 +17,9 @@ class Pricing extends React.Component {
     this.state = {
       productDetails: {},
       productId: null,
-      changed: false
+      changed: false,
+      options: { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' },
+      today: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
     };
 
     this.handleLoad = this.handleLoad.bind(this);
@@ -60,54 +66,44 @@ class Pricing extends React.Component {
   render() {
     return (
       <div>
-        <div style={pricingStyle.wholeBox}>
-          <div style={pricingStyle.priceText}>
+        <div className="wholeBox">
+
+          <div className="priceText">
             ${this.state.productDetails.price}
-          </div> <br />
-          <span>
+          </div>
+
+          <div>
             {
               this.state.productDetails.free_delivery == false ?
-                (<span style={pricingStyle.allBlueSmallText}>& Free Shipping</span>)
+                (<span className="allBlueSmallText">& Free Shipping</span>)
                 :
                 <ShippingStatement fulfilledBy={this.state.productDetails.fulfilled_by} expectedShipping={this.state.productDetails.expected_shipping} />
             }
-          </span>
-          <br />
-          <div style={pricingStyle.deliveryText}>
-            Free Delivery TODO <br />
-            if you order within TODO hrs TODO mins.
-            TODO!!
-        </div>
-          <div style={pricingStyle.stockAvailabilityText}>
-            In Stock / Out of Stock here ! TODO
-        </div>
-          <div style={pricingStyle.allText}>
-            <span style={pricingStyle.quantityLabel}>Qty: </span>
-            <span style={pricingStyle.selectQuantity}>Dropdown TODO</span>
           </div>
-          <div style={pricingStyle.paddingForButtons}>
-            Add to Cart Button here ! TODO
-        </div>
-          <div style={pricingStyle.paddingForButtons}>
-            Buy Now Button here ! TODO
-        </div>
-          <div style={pricingStyle.soldFulfilledText}>
-            Sold by here and Fulfilled by here ! TODO
-        </div>
-          <div style={pricingStyle.allText}>
-            Gift Wrap Available here ! TODO
-        </div>
-          <div style={pricingStyle.allText}>
-            <span>Location pin icon here ! TODO</span>
-            <span style={pricingStyle.allBlueSmallText}>Deliver to User TODO - ZipCode TODO </span>
+
+          <div className="deliveryText">
+            Want it {this.state.today.toLocaleDateString("en-US", this.state.options)}? Order within 7 hrs 56 mins and choose Standard Shipping at checkout.
           </div>
-          {/* Add to List */}
-          <div style={pricingStyle.allBlueSmallText}>
-            <a>Add to you Dash Buttons</a>
-            {/* https://stackoverflow.com/questions/28365233/inline-css-styles-in-react-how-to-implement-ahover */}
+
+          <div>
+            <AvailabilityStatement availQuantity={this.state.productDetails.available_quantity} />
           </div>
+
+          <div className="soldFulfilledText">
+            <SoldFulfilledStatement soldBy={this.state.productDetails.sold_by} fulfilledBy={this.state.productDetails.fulfilled_by} />
+          </div>
+
+          <div className="allText">
+            <GiftWrapStatement giftWrapAvailable={this.state.productDetails.gift_wrap_available} />
+          </div>
+
+          <div className="allText">
+            <UserLocationStatement
+              userZip={this.state.productDetails.user_zip} />
+          </div>
+
         </div>
-      </div>
+      </div >
     );
   }
 }

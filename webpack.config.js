@@ -9,15 +9,43 @@ module.exports = {
     path: DIST_DIR
   },
   module: {
-    rules: [
+    loaders: [
       {
-        test: /\.jsx?/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['env', 'react', 'es2015']
-        }
+        test: /\.jsx?$/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
       }
-    ]
+    ],
+    resolve: {
+      extensions: ['', '.js', '.jsx', '.css']
+    }
   }
 };
+
+// rules: [
+//   {
+//     test: /\.jsx?/,
+//     exclude: /node_modules/,
+//     loader: 'babel-loader',
+//     query: {
+//       presets: ['env', 'react', 'es2015']
+//     }
+//   },
+//   {
+//     test: /\.css$/,
+//     use: [
+//       // style-loader
+//       { loader: 'style-loader' },
+//       // css-loader
+//       {
+//         loader: 'css-loader',
+//         options: {
+//           modules: true
+//         }
+//       }
+//     ]
+//   }
+// ]
