@@ -24,28 +24,3 @@ module.exports = {
     }
   }
 };
-
-// rules: [
-//   {
-//     test: /\.jsx?/,
-//     exclude: /node_modules/,
-//     loader: 'babel-loader',
-//     query: {
-//       presets: ['env', 'react', 'es2015']
-//     }
-//   },
-//   {
-//     test: /\.css$/,
-//     use: [
-//       // style-loader
-//       { loader: 'style-loader' },
-//       // css-loader
-//       {
-//         loader: 'css-loader',
-//         options: {
-//           modules: true
-//         }
-//       }
-//     ]
-//   }
-// ]

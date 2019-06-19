@@ -26,17 +26,16 @@ app.get('/', (req, res) => {
 app.get('/product/:id', (req, res) => {
   console.log('%s %s %s', req.method, req.url, req.path)
   console.log(req.params.id);
-  res.status(200).send(JSON.stringify({
-    id: 1,
-    price: 6.99,
-    expected_shipping: "one-day",
-    free_delivery: true,
-    available_quantity: 1,
-    sold_by: "sold by vendorName",
-    fulfilled_by: "fulfilled by vendorName",
-    gift_wrap_available: true,
-    user_zip: "78726"
-  }));
+  var requestedId = (req.params.id).replace(":", "");
+
+  db.getProductDataById(requestedId, (err, results) => {
+    if (err) {
+      console.log(' server issue get selectId ');
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(JSON.stringify(results));
+    }
+  });
 });
 
 app.listen(PORT, () => {
