@@ -1,135 +1,115 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import $ from 'jquery';
 
-const pricingStyle = {
-  body: {
-    color: '#111111',
-    fontSize: '13px'
-  },
-  a: {
-    textDecoration: 'none',
-    color: '#0066c0'
-  },
-  wholeBox: {
-    height: '100%',
-    width: '100%',
-    borderStyle: 'solid',
-    borderWidth: '1px',
-    textAlign: 'left',
-    borderColor: '#111111',
-    borderRadius: '0 0 4px 4px',
-  },
-  priceText: {
-    display: 'inline-block',
-    width: '80%',
-    margin: 20,
-    textAlign: 'left',
-    verticalAlign: 'middle',
-    lineHeight: '30px',
-    fontColor: '#B12704',
-    fontSize: '17px'
-  },
-  deliveryText: {
-    color: '#111111',
-    fontSize: '13px',
-    padding: '6px 0px 0px'
-  },
-  stockAvailabilityText: {
-    color: '#008A00',
-    fontSize: '17px'
-  },
-  allText: {
-    color: '#111111',
-    fontSize: '13px'
-  },
-  allBlueText: {
-    color: '#0066CO',
-    fontSize: '13px'
-  },
-  allBlueSmallText: {
-    color: '#0066CO',
-    fontSize: '12px'
-  },
-  quantityLabel: {
-    padding: '0px 5px 2px 2px'
-  },
-  selectQuantity: {
-    color: '#111111',
-    fontSize: '13px',
-    background: '#f8f8f8'
-  },
-  paddingForButtons: {
-    padding: '1px 7px 2px'
-  },
-  soldFulfilledText: {
-    color: '#111111',
-    fontSize: '13px',
-    padding: '0px 0px 6px'
-  },
-};
+import ShippingStatement from './ShippingStatement.jsx';
 
-export default class Pricing extends React.Component {
-  constructor() {
-    super();
+
+
+class Pricing extends React.Component {
+  constructor(props) {
+    super(props);
 
     this.state = {
-      //TODO
+      productDetails: {},
+      productId: null,
+      changed: false
     };
 
-    this.countDown = this.countDown.bind(this); //TODO
+    this.handleLoad = this.handleLoad.bind(this);
   }
 
 
   componentDidMount() {
+    window.addEventListener('load', this.handleLoad);
+    this.handleLoad();
 
   }
 
-  countDown() {
+  componentWillUnmount() {
+    window.removeEventListener('load', this.handleLoad);
+  }
 
+  handleLoad(queryProductId) {
+    queryProductId = 1;
+    $.ajax({
+      url: "http://localhost:3030/product/:" + queryProductId,
+      type: "GET",
+      success: ((serverData) => {
+        console.log('serverData ' + typeof serverData + ', ' + serverData);
+        return serverData;
+      }),
+      error: ((err) => {
+        console.log("error getting data from server " + err);
+        return {};
+      })
+    }).then((dataReturned) => {
+      var dataParsed = JSON.parse(dataReturned);
+      var recId = dataParsed.id || queryProductId;
+      this.setState({
+        productDetails: dataParsed,
+        productId: recId
+      });
+      this.setState({
+        changed: ((this.state.changed) ? false : true)
+      });
+
+    });
   }
 
   render() {
     return (
-      <div style={pricingStyle.wholeBox}>
-        <div style={pricingStyle.priceText}>
-          Price here ! TODO
+      <div>
+        <div style={pricingStyle.wholeBox}>
+          <div style={pricingStyle.priceText}>
+            ${this.state.productDetails.price}
+          </div> <br />
+          <span>
+            {
+              this.state.productDetails.free_delivery == false ?
+                (<span style={pricingStyle.allBlueSmallText}>& Free Shipping</span>)
+                :
+                <ShippingStatement fulfilledBy={this.state.productDetails.fulfilled_by} expectedShipping={this.state.productDetails.expected_shipping} />
+            }
+          </span>
+          <br />
+          <div style={pricingStyle.deliveryText}>
+            Free Delivery TODO <br />
+            if you order within TODO hrs TODO mins.
+            TODO!!
         </div>
-        <div>
-          Price Icon here & Expected Shipping one day/two day/.. ! TODO
+          <div style={pricingStyle.stockAvailabilityText}>
+            In Stock / Out of Stock here ! TODO
         </div>
-        <div style={pricingStyle.deliveryText}>
-          Free Delivery TODO <br />
-          if you order within TODO hrs TODO mins.
-          TODO!!
+          <div style={pricingStyle.allText}>
+            <span style={pricingStyle.quantityLabel}>Qty: </span>
+            <span style={pricingStyle.selectQuantity}>Dropdown TODO</span>
+          </div>
+          <div style={pricingStyle.paddingForButtons}>
+            Add to Cart Button here ! TODO
         </div>
-        <div style={pricingStyle.stockAvailabilityText}>
-          In Stock / Out of Stock here ! TODO
+          <div style={pricingStyle.paddingForButtons}>
+            Buy Now Button here ! TODO
         </div>
-        <div style={pricingStyle.allText}>
-          <span style={pricingStyle.quantityLabel}>Qty: </span>
-          <span style={pricingStyle.selectQuantity}>Dropdown TODO</span>
+          <div style={pricingStyle.soldFulfilledText}>
+            Sold by here and Fulfilled by here ! TODO
         </div>
-        <div style={pricingStyle.paddingForButtons}>
-          Add to Cart Button here ! TODO
+          <div style={pricingStyle.allText}>
+            Gift Wrap Available here ! TODO
         </div>
-        <div style={pricingStyle.paddingForButtons}>
-          Buy Now Button here ! TODO
-        </div>
-        <div style={pricingStyle.soldFulfilledText}>
-          Sold by here and Fulfilled by here ! TODO
-        </div>
-        <div style={pricingStyle.allText}>
-          Gift Wrap Available here ! TODO
-        </div>
-        <div style={pricingStyle.allText}>
-          <span>Location pin icon here ! TODO</span>
-          <span style={pricingStyle.allBlueSmallText}>Deliver to User TODO - ZipCode TODO </span>
-        </div>
-        {/* Add to List */}
-        <div style={pricingStyle.allBlueSmallText}>
-          <a>Add to you Dash Buttons</a>
-          {/* https://stackoverflow.com/questions/28365233/inline-css-styles-in-react-how-to-implement-ahover */}
+          <div style={pricingStyle.allText}>
+            <span>Location pin icon here ! TODO</span>
+            <span style={pricingStyle.allBlueSmallText}>Deliver to User TODO - ZipCode TODO </span>
+          </div>
+          {/* Add to List */}
+          <div style={pricingStyle.allBlueSmallText}>
+            <a>Add to you Dash Buttons</a>
+            {/* https://stackoverflow.com/questions/28365233/inline-css-styles-in-react-how-to-implement-ahover */}
+          </div>
         </div>
       </div>
     );
   }
 }
+
+export default Pricing;
