@@ -16,7 +16,7 @@ const AvailabilityStatement = (props) => (
               <br />
               <img src="/static/addToCartButton.png" alt="Add to Cart" ></img>
               <br />
-              <img src="static/buyNowButton.png" alt="Buy Now" ></img>
+              <img src="/static/buyNowButton.png" alt="Buy Now" ></img>
             </div>
           </div>
         )

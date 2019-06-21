@@ -4,23 +4,28 @@ var DIST_DIR = path.join(__dirname, '/client/dist');
 
 module.exports = {
   entry: `${SRC_DIR}/index.js`,
+  mode: 'development',
   output: {
     filename: 'bundle.js',
     path: DIST_DIR
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        include: SRC_DIR,
+        query: {
+          presets: ['@babel/preset-env', '@babel/preset-react']
+        }
       },
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
       }
     ],
-    resolve: {
-      extensions: ['', '.js', '.jsx', '.css']
-    }
+    // resolve: {
+    //   extensions: ['', '.js', '.jsx', '.css']
+    // }
   }
 };

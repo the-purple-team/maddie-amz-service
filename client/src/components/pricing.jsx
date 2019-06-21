@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
-import style from "../../../public/style.css";
+//import { Wrapper } from "./elements.jsx";
+import "../../dist/style.css";
 
 import ShippingStatement from './ShippingStatement.jsx';
 import AvailabilityStatement from './AvailabilityStatement.jsx';
