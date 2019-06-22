@@ -6,13 +6,13 @@ const SoldFulfilledStatement = (props) => (
     {
       props.soldBy === props.fulfilledBy ?
         (
-          <div>
+          <div style={{ margin: '10px' }}>
             Sold and Fulfilled by {props.soldBy}.
           </div>
         )
         :
         (
-          <div>
+          <div style={{ margin: '10px' }}>
             Sold by {props.soldBy} and Fulfilled by {props.fulfilledBy}.
           </div>
         )

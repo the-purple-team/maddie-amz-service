@@ -2,10 +2,15 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
+  font-family: "Amazon Ember", Arial, sans-serif;
+  background-color: #fafafa;
   color: #111111;
   font-size: 13px;
+  width: 250px;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  padding-left: 10px;
 `;
 
 export const WholeBox = styled.div`
@@ -14,26 +19,28 @@ export const WholeBox = styled.div`
   border-style: solid;
   border-width: 1px;
   text-align: left;
-  border-color: #111111;
+  border-color: #dedede;
   border-radius: 0 0 4px 4px;
 `;
 
 export const PriceText = styled.div`
   display: inline-block;
-  width: 80%;
-  margin: 5;
+  width: 100%;
+  margin: 10px;
   text-align: left;
   vertical-align: middle;
-  line-height: 30px;
   color: #b12704;
   font-size: 17px;
-  font-weight: bold;
+  font-weight: normal;
+  padding-left: 0px;
 `;
 
 export const DeliveryText = styled.div`
   color: #111111;
   font-size: 13px;
-  padding: 6px 0px 0px;
+  margin: 10px;
+  padding-top: 10px;
+  padding-left: 0px;
 `;
 
 export const SoldFulfilledText = styled.div`
@@ -46,6 +53,7 @@ export const AllText = styled.div`
   color: #111111;
   font-size: 13px;
 `;
+
 
 export const SelectQuantity = styled.input`
   color: #111111;
