@@ -6,7 +6,7 @@ const entryStyle = {
     width: '100%',
     borderStyle: 'solid',
     borderWidth: '1px',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   img: {
     display: 'inline-block',
@@ -17,7 +17,7 @@ const entryStyle = {
     verticalAlign: 'middle',
     lineHeight: '90px',
     borderStyle: 'solid',
-  }
+  },
 };
 
 export default class RelatedEntry extends React.Component {
@@ -29,7 +29,9 @@ export default class RelatedEntry extends React.Component {
     return (
       <div style={entryStyle.paper}>
         <div style={entryStyle.img}>{this.props.img}</div>
-        <h1>{this.props.name}</h1>
+        <h1 style={{ marginLeft: '20px', color: '#d8315b' }}>
+          {this.props.name}
+        </h1>
         <p>{this.props.desc}</p>
       </div>
     );
