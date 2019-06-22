@@ -1,9 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+  Wrapper,
+  WholeBox,
+  PriceText,
+  DeliveryText,
+  SoldFulfilledText,
+  AllText,
+} from 'elements.jsx';
 import $ from 'jquery';
 
 //import { Wrapper } from "./elements.jsx";
-import "../../dist/style.css";
+import '../../dist/style.css';
 
 import ShippingStatement from './ShippingStatement.jsx';
 import AvailabilityStatement from './AvailabilityStatement.jsx';
@@ -19,18 +27,21 @@ class Pricing extends React.Component {
       productDetails: {},
       productId: null,
       changed: false,
-      options: { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' },
-      today: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+      options: {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      },
+      today: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
     };
 
     this.handleLoad = this.handleLoad.bind(this);
   }
 
-
   componentDidMount() {
     window.addEventListener('load', this.handleLoad);
     this.handleLoad();
-
   }
 
   componentWillUnmount() {
@@ -40,71 +51,76 @@ class Pricing extends React.Component {
   handleLoad(queryProductId) {
     queryProductId = 1;
     $.ajax({
-      url: "http://localhost:3030/product/:" + queryProductId,
-      type: "GET",
-      success: ((serverData) => {
+      url: 'http://localhost:3030/product/:' + queryProductId,
+      type: 'GET',
+      success: (serverData) => {
         console.log('serverData ' + typeof serverData + ', ' + serverData);
         return serverData;
-      }),
-      error: ((err) => {
-        console.log("error getting data from server " + err);
+      },
+      error: (err) => {
+        console.log('error getting data from server ' + err);
         return {};
-      })
+      },
     }).then((dataReturned) => {
       var dataParsed = JSON.parse(dataReturned);
       var recId = dataParsed.id || queryProductId;
       this.setState({
         productDetails: dataParsed,
-        productId: recId
+        productId: recId,
       });
       this.setState({
-        changed: ((this.state.changed) ? false : true)
+        changed: this.state.changed ? false : true,
       });
-
     });
   }
 
   render() {
     return (
-      <div>
-        <div className="wholeBox">
+      <Wrapper>
+        <WholeBox>
+          <PriceText>${this.state.productDetails.price}</PriceText>
 
-          <div className="priceText">
-            ${this.state.productDetails.price}
-          </div>
+          {this.state.productDetails.free_delivery == false ? (
+            <span style={{ color: '#0066C0', fontSize: '13px' }}>
+              & Free Shipping
+            </span>
+          ) : (
+            <ShippingStatement
+              fulfilledBy={this.state.productDetails.fulfilled_by}
+              expectedShipping={this.state.productDetails.expected_shipping}
+            />
+          )}
 
-          <div>
-            {
-              this.state.productDetails.free_delivery == false ?
-                (<span className="allBlueSmallText">& Free Shipping</span>)
-                :
-                <ShippingStatement fulfilledBy={this.state.productDetails.fulfilled_by} expectedShipping={this.state.productDetails.expected_shipping} />
-            }
-          </div>
+          <DeliveryText>
+            Want it{' '}
+            {this.state.today.toLocaleDateString('en-US', this.state.options)}?
+            Order within 7 hrs 56 mins and choose Standard Shipping at checkout.
+          </DeliveryText>
 
-          <div className="deliveryText">
-            Want it {this.state.today.toLocaleDateString("en-US", this.state.options)}? Order within 7 hrs 56 mins and choose Standard Shipping at checkout.
-          </div>
+          <AvailabilityStatement
+            availQuantity={this.state.productDetails.available_quantity}
+          />
 
-          <div>
-            <AvailabilityStatement availQuantity={this.state.productDetails.available_quantity} />
-          </div>
+          <SoldFulfilledText>
+            <SoldFulfilledStatement
+              soldBy={this.state.productDetails.sold_by}
+              fulfilledBy={this.state.productDetails.fulfilled_by}
+            />
+          </SoldFulfilledText>
 
-          <div className="soldFulfilledText">
-            <SoldFulfilledStatement soldBy={this.state.productDetails.sold_by} fulfilledBy={this.state.productDetails.fulfilled_by} />
-          </div>
+          <AllText>
+            <GiftWrapStatement
+              giftWrapAvailable={this.state.productDetails.gift_wrap_available}
+            />
+          </AllText>
 
-          <div className="allText">
-            <GiftWrapStatement giftWrapAvailable={this.state.productDetails.gift_wrap_available} />
-          </div>
-
-          <div className="allText">
+          <AllText>
             <UserLocationStatement
-              userZip={this.state.productDetails.user_zip} />
-          </div>
-
-        </div>
-      </div >
+              userZip={this.state.productDetails.user_zip}
+            />
+          </AllText>
+        </WholeBox>
+      </Wrapper>
     );
   }
 }
