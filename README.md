@@ -11,9 +11,14 @@
 
 ## Table of Contents
 
+1. [Assumptions] (#Assumptions)
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
+
+## Assumptions
+
+-- all Users are located in US
 
 ## Usage
 
@@ -33,7 +38,16 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 From within the root directory:
 
 ```sh
+brew install mysql@5.7
+
 npm install -g webpack
 npm install
 ```
 
+connect mysql --> mysql -u root -p
+
+<!-- /usr/local/opt/mysql@5.7/bin/mysql.server start
+
+??
+export LDFLAGS="-L/usr/local/opt/mysql@5.7/lib"
+  export CPPFLAGS="-I/usr/local/opt/mysql@5.7/include" -->
