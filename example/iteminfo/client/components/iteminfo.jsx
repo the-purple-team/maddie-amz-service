@@ -1,13 +1,5 @@
 import React from 'react';
-
-const infoStyle = {
-  float: 'left',
-  width: '50%',
-  height: '50%',
-  borderStyle: 'solid',
-  borderWidth: '2px',
-  textAlign: 'center'
-};
+import { StyledButton, InfoSection } from 'elements.jsx';
 
 export default class Info extends React.Component {
   constructor() {
@@ -19,9 +11,9 @@ export default class Info extends React.Component {
         location: 'Albany, NY',
         condition: 'Brand New',
         name: 'CanonEOS 40d',
-        price: 499
+        price: 499,
       },
-      currentBid: 499
+      currentBid: 499,
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -33,34 +25,31 @@ export default class Info extends React.Component {
     item.price = newBid;
     this.setState({
       currentBid: newBid,
-      item: item
+      item: item,
     });
   }
 
   render() {
     return (
-      <div style={infoStyle}>
+      <InfoSection>
         <p>
-          <span>
-            Auction: {this.state.item.ID}
-          </span>
-          <br/>
-          <span>
-            For sale is a <em>
-              {this.state.item.condition}
-            </em> <strong>
-              {this.state.item.name}
-            </strong>
-          </span>
+          <span>Auction: {this.state.item.ID}</span>
           <br />
           <span>
-            Current Bid: ${this.state.item.price}
+            For sale is a <em>{this.state.item.condition}</em>{' '}
+            <strong>{this.state.item.name}</strong>
           </span>
-          <button onClick={(e) => {this.handleClick(e)}}>
-          Bid
-          </button>
+          <br />
+          <span>Current Bid: ${this.state.item.price}</span>
+          <StyledButton
+            onClick={(e) => {
+              this.handleClick(e);
+            }}
+          >
+            Bid
+          </StyledButton>
         </p>
-      </div>
+      </InfoSection>
     );
   }
 }
