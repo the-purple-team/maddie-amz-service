@@ -7,11 +7,8 @@ import {
   DeliveryText,
   SoldFulfilledText,
   AllText,
-} from 'elements.jsx';
+} from './elements.jsx';
 import $ from 'jquery';
-
-//import { Wrapper } from "./elements.jsx";
-import '../../dist/style.css';
 
 import ShippingStatement from './ShippingStatement.jsx';
 import AvailabilityStatement from './AvailabilityStatement.jsx';

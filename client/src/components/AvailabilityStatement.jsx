@@ -1,5 +1,5 @@
 import React from 'react';
-import { AllText, SelectQuantity } from 'elements.jsx';
+import { AllText, SelectQuantity } from './elements.jsx';
 
 const AvailabilityStatement = (props) => (
   <>
