@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 import {
   Wrapper,
   WholeBox,
@@ -7,11 +7,9 @@ import {
   DeliveryText,
   SoldFulfilledText,
   AllText,
-} from 'elements.jsx';
-import $ from 'jquery';
+} from './elements.jsx';
 
-//import { Wrapper } from "./elements.jsx";
-import "../../../public/style.css";
+import $ from 'jquery';
 
 import ShippingStatement from './ShippingStatement.jsx';
 import AvailabilityStatement from './AvailabilityStatement.jsx';
@@ -40,6 +38,7 @@ class Pricing extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     window.addEventListener('load', this.handleLoad);
     this.handleLoad();
   }
@@ -48,8 +47,10 @@ class Pricing extends React.Component {
     window.removeEventListener('load', this.handleLoad);
   }
 
-  handleLoad(queryProductId) {
-    queryProductId = 1;
+  handleLoad() {
+    var queryProductId = window.location.pathname.slice(10);
+    queryProductId = queryProductId.replace("/", "");
+    console.log('queryProductId ' + queryProductId);
     $.ajax({
       url: 'http://localhost:3030/product/:' + queryProductId,
       type: 'GET',
@@ -81,20 +82,20 @@ class Pricing extends React.Component {
           <PriceText>${this.state.productDetails.price}</PriceText>
 
           {this.state.productDetails.free_delivery == false ? (
-            <span style={{ color: '#0066C0', fontSize: '13px' }}>
+            <span style={{ color: '#0066C0', fontSize: '13px', margin: '10px', paddingLeft: '10px' }}>
               & Free Shipping
             </span>
           ) : (
-            <ShippingStatement
-              fulfilledBy={this.state.productDetails.fulfilled_by}
-              expectedShipping={this.state.productDetails.expected_shipping}
-            />
-          )}
+              <ShippingStatement
+                fulfilledBy={this.state.productDetails.fulfilled_by}
+                expectedShipping={this.state.productDetails.expected_shipping}
+              />
+            )}
 
           <DeliveryText>
-            Want it{' '}
-            {this.state.today.toLocaleDateString('en-US', this.state.options)}?
-            Order within 7 hrs 56 mins and choose Standard Shipping at checkout.
+            <b>Want it{' '}
+              {this.state.today.toLocaleDateString('en-US', this.state.options)} </b> ?
+            Order within 7 hrs 56 mins and choose <b>Standard Shipping</b> at checkout.
           </DeliveryText>
 
           <AvailabilityStatement

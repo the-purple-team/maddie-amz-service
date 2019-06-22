@@ -5,9 +5,9 @@ const GiftWrapStatement = (props) => (
   <div>
     {
       props.giftWrapAvailable == true ?
-        (<span>Gift-wrap available.</span>)
+        (<span style={{ margin: '10px' }}>Gift-wrap available.</span>)
         :
-        (<span>Gift-wrap is not available.</span>)
+        (<span style={{ margin: '10px' }}>Gift-wrap is not available.</span>)
     }
   </div>
 );
