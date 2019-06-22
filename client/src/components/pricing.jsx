@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
 //import { Wrapper } from "./elements.jsx";
-import "../../dist/style.css";
+import "../../../public/style.css";
 
 import ShippingStatement from './ShippingStatement.jsx';
 import AvailabilityStatement from './AvailabilityStatement.jsx';
