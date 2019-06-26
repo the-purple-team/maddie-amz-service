@@ -44,8 +44,8 @@ var Vendor = function () {
 };
 
 var ItemAvailability = function () {
-  let item_id = faker.random.number(10);
-  let vendor_id = faker.random.number(10);
+  let item_id = faker.random.number(20);
+  let vendor_id = faker.random.number(20);
   let items_condition = faker.commerce.productMaterial();
   let price = faker.commerce.price();
   let quantity_available = faker.random.number(1000);
