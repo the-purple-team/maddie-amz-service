@@ -20,7 +20,7 @@ function generateUsers() {
   return;
 }
 
-//generateUsers();
+generateUsers();
 
 function generateItems() {
 
@@ -41,7 +41,7 @@ function generateItems() {
   return;
 }
 
-//generateItems();
+generateItems();
 
 function generateVendors() {
 
@@ -62,7 +62,7 @@ function generateVendors() {
   return;
 }
 
-//generateVendors();
+generateVendors();
 
 function generateItemAvail() {
 

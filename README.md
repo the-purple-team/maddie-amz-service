@@ -1,53 +1,80 @@
-# Project Name
+# Amazon Item's Availability and Shipping Service
 
-> Project description
+https://docs.google.com/spreadsheets/d/1jAmQhyiLWy7RlhhKkWwPfVqF4SVUXgnY1TYL2BAQMh4/edit#gid=2131387446
 
 ## Related Projects
 
-  - https://github.com/the-purple-team/bruce-service
-  - https://github.com/the-purple-team/bradyService
-  - https://github.com/the-purple-team/Jose-Questions-And-Answers-Service
-  - https://github.com/teamName/repo
+- https://github.com/the-purple-team/bradyProxy
+- https://github.com/the-purple-team/bruce-service
+- https://github.com/the-purple-team/Jose-FEC
+- https://github.com/the-purple-team/maddie-amz-service
 
 ## Table of Contents
 
 1. [Assumptions] (#Assumptions)
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
+1. [Setup](#Setup)
+1. [Resources](#Resources)
 
 ## Assumptions
 
 -- all Users are located in US
 
-## Usage
 
-> Some usage instructions
+## Setup
 
-## Requirements
-
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-- etc
-
-## Development
-
-### Installing Dependencies
-
-From within the root directory:
-
-```sh
+### Installing Global Dependencies
+*Install*
+```console
 brew install mysql@5.7
+```
 
-npm install -g webpack
+*Connect*
+```console
+mysql -u root -p
+```
+
+### Local Dependencies / Setup
+*setup.js*
+- Copy temp_setup.js to setup.js
+- Update environment information in setup.js file
+
+*Database*
+- Make sure your mysql server is running locally
+
+- create database
+```mysql
+source ./database-mysql/schema.sql
+```
+
+- seed database
+  - from command prompt (not sql)
+```console
+node ./database-mysql/seeds/loadFakeData.js
+```
+
+### Running Locally
+Install dependencies
+```console
 npm install
 ```
 
-connect mysql --> mysql -u root -p
+Compile react app for Production
+```console
+npm run react-prod
+```
 
-<!-- /usr/local/opt/mysql@5.7/bin/mysql.server start
+Run server
+```console
+npm run server
+```
 
-??
-export LDFLAGS="-L/usr/local/opt/mysql@5.7/lib"
-  export CPPFLAGS="-I/usr/local/opt/mysql@5.7/include" -->
+
+## Resources:
+
+### Faker
+https://github.com/Marak/faker.js/wiki/
+
+### MySql
+http://www.mysqltutorial.org/mysql-foreign-key/
+
+

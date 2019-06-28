@@ -33,10 +33,10 @@ const insertIntoTable = function (tableName, data, cb) {
     dataValues += data[prop] + '"';
   }
   var queryString = 'INSERT INTO ' + tableName + ' (' + dataKeys + ') VALUES (' + dataValues + '); ';
-  console.log('db queryString = ' + queryString);
+  console.log('' + queryString + ';');
   connection.query(queryString, (err, dbRes) => {
     if (err) {
-      console.log('mysql insertIntoTable error ' + err);
+      //console.log('mysql insertIntoTable error ' + err);
       cb(err, null);
     } else {
       cb(null, dbRes);
@@ -61,10 +61,10 @@ const getProductDataById = function (id, cb) {
     'tAvail.quantity_available, tAvail.price ' +
     ' FROM item as tItem INNER JOIN item_availability as tAvail ' +
     ' WHERE tItem.id = ' + id + ' AND tItem.id = tAvail.item_id';
-  //console.log('db queryString = ' + queryString);
+  console.log('' + queryString + ';');
   connection.query(queryString, (err, dbRes) => {
     if (err) {
-      console.log('mysql insertIntoTable error ' + err);
+      //console.log('mysql insertIntoTable error ' + err);
       cb(err, null);
     } else {
       if (!dbRes) {
@@ -104,7 +104,7 @@ const getProductDataById = function (id, cb) {
               }
               dataObj.free_delivery = ((dbRes2[0].free_returns == 1) ? true : false);
 
-              console.log("dataObj = " + JSON.stringify(dataObj));
+              //console.log("dataObj = " + JSON.stringify(dataObj));
 
               cb(null, dataObj);
             }
