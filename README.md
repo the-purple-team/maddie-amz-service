@@ -4,7 +4,7 @@ https://docs.google.com/spreadsheets/d/1jAmQhyiLWy7RlhhKkWwPfVqF4SVUXgnY1TYL2BAQ
 
 ## Table of Contents
 
-1. [Assumptions] (#Assumptions)
+1. [Assumptions](#Assumptions)
 1. [Setup](#Setup)
 1. [Resources](#Resources)
 
