@@ -2,13 +2,6 @@
 
 https://docs.google.com/spreadsheets/d/1jAmQhyiLWy7RlhhKkWwPfVqF4SVUXgnY1TYL2BAQMh4/edit#gid=2131387446
 
-## Related Projects
-
-- https://github.com/the-purple-team/bradyProxy
-- https://github.com/the-purple-team/bruce-service
-- https://github.com/the-purple-team/Jose-FEC
-- https://github.com/the-purple-team/maddie-amz-service
-
 ## Table of Contents
 
 1. [Assumptions] (#Assumptions)
@@ -22,48 +15,45 @@ https://docs.google.com/spreadsheets/d/1jAmQhyiLWy7RlhhKkWwPfVqF4SVUXgnY1TYL2BAQ
 
 ## Setup
 
-### Installing Global Dependencies
-*Install*
+### Installing Dependencies
+*Install MySQL*
 ```console
 brew install mysql@5.7
 ```
 
-*Connect*
+*Install Node Packages*
 ```console
-mysql -u root -p
+npm install
 ```
 
-### Local Dependencies / Setup
-*setup.js*
-- Copy temp_setup.js to setup.js
-- Update environment information in setup.js file
-
-*Database*
-- Make sure your mysql server is running locally
-
-- create database
+*Create Database*
 ```mysql
 source ./database-mysql/schema.sql
 ```
 
-- seed database
-  - from command prompt (not sql)
+*Run MySQL*
+```console
+mysql -u root -p
+```
+
+### Setup
+*setup.js*
+- Copy temp_setup.js to setup.js
+- Update environment information in setup.js file
+
+*Seed the Database*
+- Make sure your mysql server is running locally
 ```console
 node ./database-mysql/seeds/loadFakeData.js
 ```
 
 ### Running Locally
-Install dependencies
-```console
-npm install
-```
-
-Compile react app for Production
+*Compile react app for Production*
 ```console
 npm run react-prod
 ```
 
-Run server
+*Run server*
 ```console
 npm run server
 ```
